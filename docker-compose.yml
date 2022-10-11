@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  app:
+    build: ./
+    volumes:
+      - ./:/var/www/app
+    ports:
+      - 8081:8081
+    environment:
+      - NODE_ENV=development
+      - PORT=8081
+    networks:
+      - book-gallery-network
+    command: ["npm", "run", "dev"]
+
+networks:
+  book-gallery-network:
+    external:
+      name: book-gallery-network

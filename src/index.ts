@@ -10,7 +10,7 @@ const DEFAULT_PORT = "3000";
 const port = process.env.PORT || DEFAULT_PORT;
 
 app.get("/", (req: Request, res: Response) => {
-  res.send("Express + TypeScript Server");
+  res.send("Express + TypeScript Server ");
 });
 
 app.listen(port, () => {
