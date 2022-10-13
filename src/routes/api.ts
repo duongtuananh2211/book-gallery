@@ -1,12 +1,11 @@
 import express from "express";
-import BaseController from "@core/BaseController";
-
-const bc = BaseController.getInstance();
+import UserController from "@controllers/UserController";
 
 const router = express.Router();
 
+new UserController(router);
+
 router.get("/info", (req, res) => {
-  console.log(bc);
   res.send("This is api link");
 });
 
