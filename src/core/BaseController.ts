@@ -1,24 +1,35 @@
 import BaseControllerInterface from "@core/interfaces/BaseControllerInterface";
-import { Router } from "express";
-import BaseRepositoryInterface from "@core/interfaces/BaseRepositoryInterface";
+import { Request, Response } from "express";
+
+import BaseServiceInterface from "@core/interfaces/BaseServiceInterface";
 
 abstract class BaseController implements BaseControllerInterface {
-  path: string = "";
+  list: (
+    req: Request,
+    res: Response,
+    service: BaseServiceInterface
+  ) => Promise<void> = async (req, res, service) => {
+    console.log("params", req.params);
+    const data = await service.list();
 
-  constructor(router: Router, path: string, repository: BaseRepositoryInterface) {
-    this.loadPath(path);
+    res.json(data);
+    return;
+  };
 
-    router.all(this.path, (req, res) => {
-      console.log(req.method);
+  get: (
+    req: Request,
+    res: Response,
+    service: BaseServiceInterface
+  ) => Promise<void> = async (req, res, service) => {
+    const id = req.params.id;
 
+    console.log("get ", id);
 
-      res.send(this.path);
-    });
-  }
+    const data = await service.list();
 
-  loadPath(path: string) {
-    this.path = "/" + path;
-  }
+    res.json(data);
+    return;
+  };
 }
 
 export default BaseController;

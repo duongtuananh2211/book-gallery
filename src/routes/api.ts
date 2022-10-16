@@ -1,12 +1,9 @@
 import express from "express";
 import UserController from "@controllers/UserController";
+import { resource } from "@core/Router";
 
 const router = express.Router();
 
-new UserController(router);
-
-router.get("/info", (req, res) => {
-  res.send("This is api link");
-});
+resource(router, "/users", UserController as any);
 
 export default router;
